@@ -6,7 +6,7 @@ module.exports = {
     watch: true,
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Output Management',
+            title: 'Weather App',
             template: 'src/index.html',
         }),
     ],
