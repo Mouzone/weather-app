@@ -32,13 +32,38 @@ async function queryAPI(location, date){
     }
 }
 
+function updateContent(data) {
+    const location = document.getElementById("location")
+    location.textContent = data['resolvedAddress']
+
+    const local_time = document.getElementById("local-time")
+    local_time.textContent = data['currentConditions']['datetime']
+
+    const condition = document.getElementById("condition")
+    condition.textContent = data['currentConditions']['conditions']
+
+    const icon = document.getElementById("icon")
+    icon.src = `$./src/icons/${data['currentConditions']['icon']}.svg`
+
+    const humidity = document.getElementById("humidity")
+    humidity.textContent = data['currentConditions']['humidity']
+
+    const uv_index = document.getElementById("uv-index")
+    uv_index.textContent = data['currentConditions']['uvindex']
+
+    const precip_prob = document.getElementById("precip-prob")
+    precip_prob.textContent = data['currentConditions']['precipprob']
+
+    const precip_amt = document.getElementById("precip_amt")
+    precip_amt.textContent = data['currentConditions']['precip']
+}
+
 const form = document.querySelector("form")
 form.addEventListener("submit", async event => {
     event.preventDefault()
     const date = getDate()
     const location = getLocation()
 
-    const content = document.getElementById("content")
-    const result = await queryAPI(location, date)
-    console.log(result)
+    const data = await queryAPI(location, date)
+    updateContent(data)
 })
