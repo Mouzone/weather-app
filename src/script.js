@@ -2,15 +2,7 @@ import './style.css'
 
 function getDate() {
     const date_element = document.getElementById("date")
-    if (!date_element.value) {
-        const today = new Date();
-        const year = today.getFullYear()
-        const month = String(today.getMonth() + 1).padStart(2, '0')
-        const day = String(today.getDate()).padStart(2, '0')
-        return `${year}-${month}-${day}`
-    } else {
-        return date_element.value
-    }
+    return date_element.value
 }
 
 function getLocation() {
@@ -42,6 +34,7 @@ function updateContent(data) {
     const condition = document.getElementById("condition")
     condition.textContent = data['currentConditions']['conditions']
 
+    //todo: retrieve proper icons and set icon element to it
     const icon = document.getElementById("icon")
     icon.src = `$./src/icons/${data['currentConditions']['icon']}.svg`
 
@@ -66,4 +59,12 @@ form.addEventListener("submit", async event => {
 
     const data = await queryAPI(location, date)
     updateContent(data)
+    form.reset()
+    // todo: reset form upon submission
 })
+
+function setDefaultDate() {
+    document.getElementById('date').value = new Date().toISOString().split('T')[0]
+}
+
+setDefaultDate()
