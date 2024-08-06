@@ -47,7 +47,7 @@ function updateContent(data) {
     const precip_prob = document.getElementById("precip-prob")
     precip_prob.textContent = data['currentConditions']['precipprob']
 
-    const precip_amt = document.getElementById("precip_amt")
+    const precip_amt = document.getElementById("precip-amt")
     precip_amt.textContent = data['currentConditions']['precip']
 }
 
