@@ -39,17 +39,16 @@ function updateContent(data) {
     icon.src = icons(`./${data['currentConditions']['icon']}.svg`)
 
     const humidity = document.getElementById("humidity")
-    humidity.textContent = `Humidity: ${data['currentConditions']['humidity']}%`
+    humidity.textContent = `Humidity: ${data['currentConditions']['humidity'] !== null ? data['currentConditions']['humidity'] + '%' : 'N/A'}`
 
     const uv_index = document.getElementById("uv-index")
-    uv_index.textContent = `UV Index: ${data['currentConditions']['uvindex']}`
+    uv_index.textContent = `UV Index: ${data['currentConditions']['uvindex'] !== null ? data['currentConditions']['uvindex'] : 'N/A'}`
 
     const precip_prob = document.getElementById("precip-prob")
-    precip_prob.textContent = `Precip %: ${data['currentConditions']['precipprob']}%`
+    precip_prob.textContent = `Precip %: ${data['currentConditions']['precipprob'] !== null ? data['currentConditions']['precipprob'] + '%' : 'N/A'}`
 
     const precip_amt = document.getElementById("precip-amt")
-    console.log(data['currentConditions']['precip'])
-    precip_amt.textContent = `Precip Amt: ${data['currentConditions']['precip']}in`
+    precip_amt.textContent = `Precip Amt: ${data['currentConditions']['precip'] !== null ? data['currentConditions']['precip'] + ' in' : 'N/A'}`
 }
 
 const form = document.querySelector("form")
@@ -68,5 +67,7 @@ function setDefaultDate() {
     document.getElementById('date').value = new Date().toISOString().split('T')[0]
 }
 
+// todo: loading icon
 // todo: on load set it to local location
+// todo: popup if DNE
 setDefaultDate()
